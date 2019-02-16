@@ -1,0 +1,18 @@
+defmodule Pinger.Ws do
+  def init(req, opts) do
+    {:cowboy_websocket, req, opts}
+  end
+
+  def websocket_init(state) do
+    {:ok, state}
+  end
+
+  def websocket_handle({:text, "ping"}, state) do
+    {:reply, {:text, "pong"}, state}
+  end
+
+  # Default fallback for unrecognized messages
+  def websocket_handle({:text, _}, state) do
+    {:ok, state, :hibernate}
+  end
+end
