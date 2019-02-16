@@ -15,6 +15,7 @@ defmodule Pinger.Application do
       {:_,
        [
          {"/ws", Pinger.Ws, %{}},
+         {"/static/[...]", :cowboy_static, {:priv_dir, :pinger, "static"}},
          {:_, Plug.Cowboy.Handler, {Pinger.Router, []}}
        ]}
     ]
